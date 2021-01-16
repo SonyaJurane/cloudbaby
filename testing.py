@@ -1,9 +1,11 @@
 import pyautogui
 import random  # pet will move in random direction
 import tkinter as tk  # used as GUI
+from datetime import datetime
+
 
 # x position on screen
-x = 1400
+x = 1750
 cycle = 0
 # pet must be idling because we assigned variable ‘check’ is 1,
 # after the .gif loops once, the ‘event_number‘ will randomly change btwn 1 to 9
@@ -13,10 +15,12 @@ cycle = 0
 check = 1
 idle_num = [1, 2, 3, 4]  # 5 is idle to sleep
 # once gif changes to idle-to-sleep, it must perform a sleep action to prevent instant waking up which is unnatural
-sleep_num = [10, 11, 12, 13, 15]  # 14 is sleep to idle
-walk_left = [6, 7]
-walk_right = [8, 9]
+talk = [5, 6]  # 14 is sleep to idle
+# walk_left = [6, 7]
+# walk_right = [8, 9]
 event_number = random.randrange(1, 3, 1)
+currenttime = datetime.now().strftime("%H:%M:%S")
+# starttime = 
 
 
 # transfer random no. to event
@@ -24,27 +28,27 @@ def event(cycle, check, event_number, x):
     if event_number in idle_num:
         check = 0
         print('idle')
-        window.after(400, update, cycle, check, event_number, x)  # no. 1,2,3,4 = idle
-    elif event_number == 5:
+        window.after(100, update, cycle, check, event_number, x)  # no. 1,2,3,4 = idle
+    elif event_number in talk:
         check = 1
-        print('from idle to sleep')
+        print('from idle to talk')
         window.after(100, update, cycle, check, event_number, x)  # no. 5 = idle to sleep
-    elif event_number in walk_left:
-        check = 4
-        print('walking towards left')
-        window.after(100, update, cycle, check, event_number, x)  # no. 6,7 = walk towards left
-    elif event_number in walk_right:
-        check = 5
-        print('walking towards right')
-        window.after(100, update, cycle, check, event_number, x)  # no 8,9 = walk towards right
-    elif event_number in sleep_num:
-        check = 2
-        print('sleep')
-        window.after(1000, update, cycle, check, event_number, x)  # no. 10,11,12,13,15 = sleep
-    elif event_number == 14:
-        check = 3
-        print('from sleep to idle')
-        window.after(100, update, cycle, check, event_number, x)  # no. 15 = sleep to idle
+    # elif event_number in walk_left:
+    #     check = 4
+    #     print('walking towards left')
+    #     window.after(100, update, cycle, check, event_number, x)  # no. 6,7 = walk towards left
+    # elif event_number in walk_right:
+    #     check = 5
+    #     print('walking towards right')
+    #     window.after(100, update, cycle, check, event_number, x)  # no 8,9 = walk towards right
+    # elif event_number in sleep_num:
+    #     check = 2
+    #     print('sleep')
+    #     window.after(1000, update, cycle, check, event_number, x)  # no. 10,11,12,13,15 = sleep
+    # elif event_number == 14:
+    #     check = 3
+    #     print('from sleep to idle')
+    #     window.after(100, update, cycle, check, event_number, x)  # no. 15 = sleep to idle
 
 
 # making gif work
@@ -55,7 +59,7 @@ def gif_work(cycle, frames, event_number, first_num, last_num):
         cycle += 1
     else:
         cycle = 0
-        event_number = random.randrange(first_num, last_num + 1, 1)
+        event_number = random.randrange(1,7)
     return cycle, event_number
 
 
@@ -68,8 +72,8 @@ def update(cycle, check, event_number, x):
         cycle, event_number = gif_work(cycle, idle, event_number, 1, 9)
     # idle to sleep
     elif check == 1:
-        frame = idle_to_sleep[cycle]
-        cycle, event_number = gif_work(cycle, idle_to_sleep, event_number, 10, 10)  # sleep
+        frame = idle_to_talk[cycle]
+        cycle, event_number = gif_work(cycle, idle_to_talk, event_number, 10, 10)  # sleep
     elif check == 2:
         frame = sleep[cycle]
         cycle, event_number = gif_work(cycle, sleep, event_number, 10, 15)  # sleep to idle
@@ -89,7 +93,7 @@ def update(cycle, check, event_number, x):
     # ‘100x100’ is the size of our pet in pixel,
     # ‘x’ is the x position in our screen,
     # ‘1050’ is the floor our pet stepping on.(it change with the resolution of your screen)
-    window.geometry('100x100+' + str(x) + '+900')
+    window.geometry('110x80+' + str(x) + '+930')
     label.configure(image=frame)
     window.after(1, event, cycle, check, event_number, x)
 
@@ -100,9 +104,9 @@ window = tk.Tk()
 
 # call buddy's action gif to an array
 # PhotoImage() can only be called after creation of Tk()
-idle = [tk.PhotoImage(file='idle.gif', format='gif -index %i' % (i)) for i in range(5)]  # idle gif
-idle_to_sleep = [tk.PhotoImage(file= 'idle_to_sleep.gif', format='gif -index %i' % (i)) for i in
-                 range(8)]  # idle to sleep gif
+idle = [tk.PhotoImage(file='cloud_idle2.gif', format='gif -index %i' % (i)) for i in range(28)]  # idle gif
+idle_to_talk = [tk.PhotoImage(file='cloud_talk2.gif', format='gif -index %i' % (i)) for i in
+                range(8)]  # idle to sleep gif
 sleep = [tk.PhotoImage(file='sleep.gif', format='gif -index %i' % (i)) for i in range(3)]  # sleep gif
 sleep_to_idle = [tk.PhotoImage(file='sleep_to_idle.gif', format='gif -index %i' % (i)) for i in
                  range(8)]  # sleep to idle gif
@@ -117,7 +121,7 @@ window.config(highlightbackground='black')
 label = tk.Label(window, bd=0, bg='black')
 window.overrideredirect(True)
 # make  pet background from black to transparent
-window.wm_attributes('-transparentcolor', 'black')
+window.wm_attributes('-transparent', 'black')
 window.wm_attributes("-topmost", 1)
 
 # make movable and show animation
