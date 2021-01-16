@@ -7,16 +7,14 @@ import PIL
 
 cycle = 0
 # pet must be idling because we assigned variable ‘check’ is 1,
-# after the .gif loops once, the ‘event_number‘ will randomly change btwn 1 to 9
+# after the .gif loops once, the ‘event_number‘ will randomly change btwn 1 to 6
 # has a probability of:
-# * 4/9 to keep idling or walking toward left and right
-# * 1/9 chance to change from idle to sleeping
+# * 2/3 to keep idling
+# * 1/3 to talk
 check = 1
-idle_num = [1, 2, 3, 4]  # 5 is idle to sleep
+idle_num = [1, 2, 3, 4]
 # once gif changes to idle-to-sleep, it must perform a sleep action to prevent instant waking up which is unnatural
-talk = [5, 6]  # 14 is sleep to idle
-# walk_left = [6, 7]
-# walk_right = [8, 9]
+talk = [5, 6]
 event_number = random.randrange(1, 3, 1)
 currenttime = datetime.now().strftime("%H:%M:%S")
 # starttime = 
@@ -114,12 +112,7 @@ idle = [tk.PhotoImage(file='cloud_idle.gif', format='gif -index %i' % (i)) for i
 idle_to_talk = [tk.PhotoImage(file='cloud_talk.gif', format='gif -index %i' % (i)) for i in
                 range(28)]  # idle to sleep gif
 sleep = [tk.PhotoImage(file='sleep.gif', format='gif -index %i' % (i)) for i in range(3)]  # sleep gif
-sleep_to_idle = [tk.PhotoImage(file='sleep_to_idle.gif', format='gif -index %i' % (i)) for i in
-                 range(8)]  # sleep to idle gif
-walk_positive = [tk.PhotoImage(file='walking_positive.gif', format='gif -index %i' % (i)) for i in
-                 range(8)]  # walk to left gif
-walk_negative = [tk.PhotoImage(file='walking_negative.gif', format='gif -index %i' % (i)) for i in
-                 range(8)]  # walk to right gif
+
 
 # window configuration
 window.config(highlightbackground='black')
