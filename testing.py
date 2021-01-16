@@ -6,14 +6,9 @@ import ctypes
 import PIL
 
 cycle = 0
-# pet must be idling because we assigned variable ‘check’ is 1,
-# after the .gif loops once, the ‘event_number‘ will randomly change btwn 1 to 6
-# has a probability of:
-# * 2/3 to keep idling
-# * 1/3 to talk
+
 check = 1
 idle_num = [1, 2, 3, 4]
-# once gif changes to idle-to-sleep, it must perform a sleep action to prevent instant waking up which is unnatural
 talk = [5, 6]
 event_number = random.randrange(1, 3, 1)
 currenttime = datetime.now().strftime("%H:%M:%S")
@@ -32,14 +27,15 @@ y = max_y-200
 
 # transfer random no. to event
 def event(cycle, check, event_number, x):
-    print(event_number)
+    # print(event_number)
     if event_number in idle_num:
         check = 0
-        print('idle')
+        # print('idle')
+        window.after(100, update, cycle, check, event_number, x)
     elif event_number in talk:
         check = 1
-        print('from idle to talk')
-    window.after(1000, update, cycle, check, event_number, x)  # no. 5 = idle to sleep
+        # print('from idle to talk')
+        window.after(1000, update, cycle, check, event_number, x)
         #from textwimage import makeittalk
         #makeittalk('Hello!')
 
@@ -81,22 +77,6 @@ def update(cycle, check, event_number, x):
         frame = idle_to_talk[cycle]
         cycle, event_number = gif_work(cycle, idle_to_talk, event_number, 10, 10)  # sleep
 
-
-    # global action, y
-    # rand = random.randrange(0, 100)
-    #
-    # if rand < 3:
-    #     action = [0, 0]
-    # elif rand < 6:
-    #     action = [random.randrange(-5, 5), random.randrange(-5, 5)]
-    # x += action[0]
-    # y += action[1]
-    # if x > max_x:
-    #     x -= action[0]
-    #     action[0] = -action[0]
-    # if y > max_y:
-    #     y -= action[1]
-    #     action[1] = -action[1]
     window.geometry('200x80+' + str(x) + '+' + str(max_y-150))
     label.configure(image=frame)
     window.after(1, event, cycle, check, event_number, x)
