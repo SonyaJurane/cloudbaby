@@ -38,29 +38,12 @@ def event(cycle, check, event_number, x):
     if event_number in idle_num:
         check = 0
         print('idle')
-        window.after(100, update, cycle, check, event_number, x)  # no. 1,2,3,4 = idle
     elif event_number in talk:
         check = 1
         print('from idle to talk')
-        window.after(100, update, cycle, check, event_number, x)  # no. 5 = idle to sleep
+    window.after(100, update, cycle, check, event_number, x)  # no. 5 = idle to sleep
         #from textwimage import makeittalk
         #makeittalk('Hello!')
-    # elif event_number in walk_left:
-    #     check = 4
-    #     print('walking towards left')
-    #     window.after(100, update, cycle, check, event_number, x)  # no. 6,7 = walk towards left
-    # elif event_number in walk_right:
-    #     check = 5
-    #     print('walking towards right')
-    #     window.after(100, update, cycle, check, event_number, x)  # no 8,9 = walk towards right
-    # elif event_number in sleep_num:
-    #     check = 2
-    #     print('sleep')
-    #     window.after(1000, update, cycle, check, event_number, x)  # no. 10,11,12,13,15 = sleep
-    # elif event_number == 14:
-    #     check = 3
-    #     print('from sleep to idle')
-    #     window.after(100, update, cycle, check, event_number, x)  # no. 15 = sleep to idle
 
 
 # making gif work
