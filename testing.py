@@ -2,10 +2,9 @@ import pyautogui
 import random  # pet will move in random direction
 import tkinter as tk  # used as GUI
 from datetime import datetime
+import ctypes
+import PIL
 
-
-# x position on screen
-x = 1750
 cycle = 0
 # pet must be idling because we assigned variable ‘check’ is 1,
 # after the .gif loops once, the ‘event_number‘ will randomly change btwn 1 to 9
@@ -21,6 +20,16 @@ talk = [5, 6]  # 14 is sleep to idle
 event_number = random.randrange(1, 3, 1)
 currenttime = datetime.now().strftime("%H:%M:%S")
 # starttime = 
+
+action = [random.randrange(-5, 5), random.randrange(-5,5)]
+# screen resolution
+user32 = ctypes.windll.user32
+max_x = user32.GetSystemMetrics(0)
+max_y = user32.GetSystemMetrics(1)
+
+# start x and y positions
+x = max_x-400
+y = max_y-200
 
 
 # transfer random no. to event
@@ -90,11 +99,22 @@ def update(cycle, check, event_number, x):
         cycle, event_number = gif_work(cycle, walk_negative, event_number, 1, 9)
         x -= -3
 
-    # location of our tkinter window aka the position of our pet:
-    # ‘100x100’ is the size of our pet in pixel,
-    # ‘x’ is the x position in our screen,
-    # ‘1050’ is the floor our pet stepping on.(it change with the resolution of your screen)
-    window.geometry('200x80+' + str(x) + '+930')
+    global action, y
+    rand = random.randrange(0, 100)
+
+    if rand < 3:
+        action = [0, 0]
+    elif rand < 6:
+        action = [random.randrange(-5, 5), random.randrange(-5, 5)]
+    x += action[0]
+    y += action[1]
+    if x > max_x:
+        x -= action[0]
+        action[0] = -action[0]
+    if y > max_y:
+        y -= action[1]
+        action[1] = -action[1]
+    window.geometry('100x100+' + str(x) + '+' + str(y))
     label.configure(image=frame)
     window.after(1, event, cycle, check, event_number, x)
 
