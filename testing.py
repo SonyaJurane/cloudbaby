@@ -39,7 +39,7 @@ def event(cycle, check, event_number, x):
     elif event_number in talk:
         check = 1
         print('from idle to talk')
-    window.after(100, update, cycle, check, event_number, x)  # no. 5 = idle to sleep
+    window.after(1000, update, cycle, check, event_number, x)  # no. 5 = idle to sleep
         #from textwimage import makeittalk
         #makeittalk('Hello!')
 
