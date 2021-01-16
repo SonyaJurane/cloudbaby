@@ -114,7 +114,7 @@ def update(cycle, check, event_number, x):
     if y > max_y:
         y -= action[1]
         action[1] = -action[1]
-    window.geometry('200x80+' + str(x) + '+' + str(y))
+    window.geometry('200x80+' + str(x) + '+' + str(max_y-150))
     label.configure(image=frame)
     window.after(1, event, cycle, check, event_number, x)
 
