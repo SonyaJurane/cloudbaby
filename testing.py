@@ -25,6 +25,7 @@ currenttime = datetime.now().strftime("%H:%M:%S")
 
 # transfer random no. to event
 def event(cycle, check, event_number, x):
+    print(event_number)
     if event_number in idle_num:
         check = 0
         print('idle')
@@ -69,7 +70,7 @@ def update(cycle, check, event_number, x):
     # idle
     if check == 0:
         frame = idle[cycle]
-        cycle, event_number = gif_work(cycle, idle, event_number, 1, 9)
+        cycle, event_number = gif_work(cycle, idle, event_number, 1, 28)
     # idle to sleep
     elif check == 1:
         frame = idle_to_talk[cycle]
@@ -93,7 +94,7 @@ def update(cycle, check, event_number, x):
     # ‘100x100’ is the size of our pet in pixel,
     # ‘x’ is the x position in our screen,
     # ‘1050’ is the floor our pet stepping on.(it change with the resolution of your screen)
-    window.geometry('110x80+' + str(x) + '+930')
+    window.geometry('200x80+' + str(x) + '+930')
     label.configure(image=frame)
     window.after(1, event, cycle, check, event_number, x)
 
@@ -104,9 +105,9 @@ window = tk.Tk()
 
 # call buddy's action gif to an array
 # PhotoImage() can only be called after creation of Tk()
-idle = [tk.PhotoImage(file='cloud_idle2.gif', format='gif -index %i' % (i)) for i in range(28)]  # idle gif
-idle_to_talk = [tk.PhotoImage(file='cloud_talk2.gif', format='gif -index %i' % (i)) for i in
-                range(8)]  # idle to sleep gif
+idle = [tk.PhotoImage(file='cloud_idle.gif', format='gif -index %i' % (i)) for i in range(28)]  # idle gif
+idle_to_talk = [tk.PhotoImage(file='cloud_talk.gif', format='gif -index %i' % (i)) for i in
+                range(28)]  # idle to sleep gif
 sleep = [tk.PhotoImage(file='sleep.gif', format='gif -index %i' % (i)) for i in range(3)]  # sleep gif
 sleep_to_idle = [tk.PhotoImage(file='sleep_to_idle.gif', format='gif -index %i' % (i)) for i in
                  range(8)]  # sleep to idle gif
