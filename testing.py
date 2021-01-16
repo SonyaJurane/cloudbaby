@@ -111,8 +111,6 @@ window = tk.Tk()
 idle = [tk.PhotoImage(file='cloud_idle.gif', format='gif -index %i' % (i)) for i in range(28)]  # idle gif
 idle_to_talk = [tk.PhotoImage(file='cloud_talk.gif', format='gif -index %i' % (i)) for i in
                 range(28)]  # idle to sleep gif
-sleep = [tk.PhotoImage(file='sleep.gif', format='gif -index %i' % (i)) for i in range(3)]  # sleep gif
-
 
 # window configuration
 window.config(highlightbackground='black')
@@ -126,9 +124,8 @@ window.wm_attributes("-topmost", 1)
 # make movable and show animation
 label.pack()
 
-# loop the program
-# program will call the update function with the following assignment after 1000 ms,
-# which is 1s and we could control the speed of the animation by changing it.
+# after 1000 ms (1s), program will call update() to change animation
 window.after(1, update, cycle, check, event_number, x)
 
+# run the Tkinter event loop
 window.mainloop()
