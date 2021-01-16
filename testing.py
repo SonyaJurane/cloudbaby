@@ -15,9 +15,9 @@ cycle = 0
 check = 1
 idle_num = [1, 2, 3, 4]  # 5 is idle to sleep
 # once gif changes to idle-to-sleep, it must perform a sleep action to prevent instant waking up which is unnatural
-sleep_num = [10, 11, 12, 13, 15]  # 14 is sleep to idle
-walk_left = [6, 7]
-walk_right = [8, 9]
+talk = [5, 6]  # 14 is sleep to idle
+# walk_left = [6, 7]
+# walk_right = [8, 9]
 event_number = random.randrange(1, 3, 1)
 currenttime = datetime.now().strftime("%H:%M:%S")
 # starttime = 
@@ -29,26 +29,26 @@ def event(cycle, check, event_number, x):
         check = 0
         print('idle')
         window.after(100, update, cycle, check, event_number, x)  # no. 1,2,3,4 = idle
-    elif event_number == 5:
+    elif event_number in talk:
         check = 1
-        print('from idle to sleep')
+        print('from idle to talk')
         window.after(100, update, cycle, check, event_number, x)  # no. 5 = idle to sleep
-    elif event_number in walk_left:
-        check = 4
-        print('walking towards left')
-        window.after(100, update, cycle, check, event_number, x)  # no. 6,7 = walk towards left
-    elif event_number in walk_right:
-        check = 5
-        print('walking towards right')
-        window.after(100, update, cycle, check, event_number, x)  # no 8,9 = walk towards right
-    elif event_number in sleep_num:
-        check = 2
-        print('sleep')
-        window.after(1000, update, cycle, check, event_number, x)  # no. 10,11,12,13,15 = sleep
-    elif event_number == 14:
-        check = 3
-        print('from sleep to idle')
-        window.after(100, update, cycle, check, event_number, x)  # no. 15 = sleep to idle
+    # elif event_number in walk_left:
+    #     check = 4
+    #     print('walking towards left')
+    #     window.after(100, update, cycle, check, event_number, x)  # no. 6,7 = walk towards left
+    # elif event_number in walk_right:
+    #     check = 5
+    #     print('walking towards right')
+    #     window.after(100, update, cycle, check, event_number, x)  # no 8,9 = walk towards right
+    # elif event_number in sleep_num:
+    #     check = 2
+    #     print('sleep')
+    #     window.after(1000, update, cycle, check, event_number, x)  # no. 10,11,12,13,15 = sleep
+    # elif event_number == 14:
+    #     check = 3
+    #     print('from sleep to idle')
+    #     window.after(100, update, cycle, check, event_number, x)  # no. 15 = sleep to idle
 
 
 # making gif work
@@ -59,7 +59,7 @@ def gif_work(cycle, frames, event_number, first_num, last_num):
         cycle += 1
     else:
         cycle = 0
-        event_number = random.randrange(first_num, last_num + 1, 1)
+        event_number = random.randrange(1,7)
     return cycle, event_number
 
 
@@ -93,7 +93,7 @@ def update(cycle, check, event_number, x):
     # ‘100x100’ is the size of our pet in pixel,
     # ‘x’ is the x position in our screen,
     # ‘1050’ is the floor our pet stepping on.(it change with the resolution of your screen)
-    window.geometry('200x200+' + str(x) + '+930')
+    window.geometry('110x80+' + str(x) + '+930')
     label.configure(image=frame)
     window.after(1, event, cycle, check, event_number, x)
 
@@ -104,8 +104,8 @@ window = tk.Tk()
 
 # call buddy's action gif to an array
 # PhotoImage() can only be called after creation of Tk()
-idle = [tk.PhotoImage(file='cloud_idle.gif', format='gif -index %i' % (i)) for i in range(28)]  # idle gif
-idle_to_talk = [tk.PhotoImage(file='cloud_talk.gif', format='gif -index %i' % (i)) for i in
+idle = [tk.PhotoImage(file='cloud_idle2.gif', format='gif -index %i' % (i)) for i in range(28)]  # idle gif
+idle_to_talk = [tk.PhotoImage(file='cloud_talk2.gif', format='gif -index %i' % (i)) for i in
                 range(8)]  # idle to sleep gif
 sleep = [tk.PhotoImage(file='sleep.gif', format='gif -index %i' % (i)) for i in range(3)]  # sleep gif
 sleep_to_idle = [tk.PhotoImage(file='sleep_to_idle.gif', format='gif -index %i' % (i)) for i in
