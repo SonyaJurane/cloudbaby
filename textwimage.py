@@ -6,22 +6,20 @@ import os
 
 window = Tk()
 
-#frameCnt = 5
-#frames = [PhotoImage(file='idle.gif', format='gif -index %i' % (i)) for i in range(frameCnt)]
-
-
-image = Image.open('speech_bubble.png')
+image = Image.open('cloud_idle.gif')
 tk_image = ImageTk.PhotoImage(image)
+image2 = Image.open('speech_bubble.png')
+tk_image2 = ImageTk.PhotoImage(image2)
 
-#cloudgif = 
+cloudgif = tk.Label(window, image=tk_image, compound='center', bg='black')
 
-speechbubble = tk.Label(window, text='Have a nice day!', image=tk_image, compound='center', bd=0)
+speechbubble = tk.Label(window, text='Have a nice day!', image=tk_image2, compound='center', bg='black')
 speechbubble.config(font=("Courier 10 bold"))
 
 window.overrideredirect(True) #remove the window border
 
 window.wm_attributes('-transparentcolor', 'black')
 
+cloudgif.pack()
 speechbubble.pack()
-
 window.mainloop()
