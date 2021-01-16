@@ -1,6 +1,8 @@
 import pyautogui
 import random  # pet will move in random direction
 import tkinter as tk  # used as GUI
+from datetime import datetime
+
 
 # x position on screen
 x = 1400
@@ -17,6 +19,7 @@ sleep_num = [10, 11, 12, 13, 15]  # 14 is sleep to idle
 walk_left = [6, 7]
 walk_right = [8, 9]
 event_number = random.randrange(1, 3, 1)
+currenttime = datetime.now().strftime("%H:%M:%S")
 
 
 # transfer random no. to event
