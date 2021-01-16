@@ -2,6 +2,7 @@ from tkinter import *
 import time
 import os
 
+x=1400
 root = Tk()
 
 frameCnt = 5
@@ -15,6 +16,7 @@ def update(ind):
         ind = 0
     label.configure(image=frame)
     root.after(100, update, ind)
+    root.geometry('100x100+' + str(x) + '+900')
 
 
 root.config(highlightbackground='black')
