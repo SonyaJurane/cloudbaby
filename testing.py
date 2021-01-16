@@ -17,7 +17,6 @@ sleep_num = [10, 11, 12, 13, 15]  # 14 is sleep to idle
 walk_left = [6, 7]
 walk_right = [8, 9]
 event_number = random.randrange(1, 3, 1)
-impath = 'C:\\Users\\Patty\\PycharmProjects\\cloudbaby\\'
 
 
 # transfer random no. to event
@@ -102,7 +101,7 @@ window = tk.Tk()
 # call buddy's action gif to an array
 # PhotoImage() can only be called after creation of Tk()
 idle = [tk.PhotoImage(file='idle.gif', format='gif -index %i' % (i)) for i in range(5)]  # idle gif
-idle_to_sleep = [tk.PhotoImage(file=impath + 'idle_to_sleep.gif', format='gif -index %i' % (i)) for i in
+idle_to_sleep = [tk.PhotoImage(file= 'idle_to_sleep.gif', format='gif -index %i' % (i)) for i in
                  range(8)]  # idle to sleep gif
 sleep = [tk.PhotoImage(file='sleep.gif', format='gif -index %i' % (i)) for i in range(3)]  # sleep gif
 sleep_to_idle = [tk.PhotoImage(file='sleep_to_idle.gif', format='gif -index %i' % (i)) for i in
