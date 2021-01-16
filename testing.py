@@ -82,20 +82,7 @@ def update(cycle, check, event_number, x):
     elif check == 1:
         frame = idle_to_talk[cycle]
         cycle, event_number = gif_work(cycle, idle_to_talk, event_number, 10, 10)  # sleep
-    elif check == 2:
-        frame = sleep[cycle]
-        cycle, event_number = gif_work(cycle, sleep, event_number, 10, 15)  # sleep to idle
-    elif check == 3:
-        frame = sleep_to_idle[cycle]
-        cycle, event_number = gif_work(cycle, sleep_to_idle, event_number, 1, 1)  # walk toward left
-    elif check == 4:
-        frame = walk_positive[cycle]
-        cycle, event_number = gif_work(cycle, walk_positive, event_number, 1, 9)
-        x -= 3  # walk towards right
-    elif check == 5:
-        frame = walk_negative[cycle]
-        cycle, event_number = gif_work(cycle, walk_negative, event_number, 1, 9)
-        x -= -3
+
 
     # global action, y
     # rand = random.randrange(0, 100)
