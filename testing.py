@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 # x position on screen
-x = 1400
+x = 1750
 cycle = 0
 # pet must be idling because we assigned variable ‘check’ is 1,
 # after the .gif loops once, the ‘event_number‘ will randomly change btwn 1 to 9
@@ -28,7 +28,7 @@ def event(cycle, check, event_number, x):
     if event_number in idle_num:
         check = 0
         print('idle')
-        window.after(400, update, cycle, check, event_number, x)  # no. 1,2,3,4 = idle
+        window.after(100, update, cycle, check, event_number, x)  # no. 1,2,3,4 = idle
     elif event_number == 5:
         check = 1
         print('from idle to sleep')
@@ -72,8 +72,8 @@ def update(cycle, check, event_number, x):
         cycle, event_number = gif_work(cycle, idle, event_number, 1, 9)
     # idle to sleep
     elif check == 1:
-        frame = idle_to_sleep[cycle]
-        cycle, event_number = gif_work(cycle, idle_to_sleep, event_number, 10, 10)  # sleep
+        frame = idle_to_talk[cycle]
+        cycle, event_number = gif_work(cycle, idle_to_talk, event_number, 10, 10)  # sleep
     elif check == 2:
         frame = sleep[cycle]
         cycle, event_number = gif_work(cycle, sleep, event_number, 10, 15)  # sleep to idle
@@ -93,7 +93,7 @@ def update(cycle, check, event_number, x):
     # ‘100x100’ is the size of our pet in pixel,
     # ‘x’ is the x position in our screen,
     # ‘1050’ is the floor our pet stepping on.(it change with the resolution of your screen)
-    window.geometry('100x100+' + str(x) + '+900')
+    window.geometry('200x200+' + str(x) + '+930')
     label.configure(image=frame)
     window.after(1, event, cycle, check, event_number, x)
 
@@ -104,9 +104,9 @@ window = tk.Tk()
 
 # call buddy's action gif to an array
 # PhotoImage() can only be called after creation of Tk()
-idle = [tk.PhotoImage(file='idle.gif', format='gif -index %i' % (i)) for i in range(5)]  # idle gif
-idle_to_sleep = [tk.PhotoImage(file= 'idle_to_sleep.gif', format='gif -index %i' % (i)) for i in
-                 range(8)]  # idle to sleep gif
+idle = [tk.PhotoImage(file='cloud_idle.gif', format='gif -index %i' % (i)) for i in range(28)]  # idle gif
+idle_to_talk = [tk.PhotoImage(file='cloud_talk.gif', format='gif -index %i' % (i)) for i in
+                range(8)]  # idle to sleep gif
 sleep = [tk.PhotoImage(file='sleep.gif', format='gif -index %i' % (i)) for i in range(3)]  # sleep gif
 sleep_to_idle = [tk.PhotoImage(file='sleep_to_idle.gif', format='gif -index %i' % (i)) for i in
                  range(8)]  # sleep to idle gif
@@ -121,7 +121,7 @@ window.config(highlightbackground='black')
 label = tk.Label(window, bd=0, bg='black')
 window.overrideredirect(True)
 # make  pet background from black to transparent
-window.wm_attributes('-transparentcolor', 'black')
+window.wm_attributes('-transparent', 'black')
 window.wm_attributes("-topmost", 1)
 
 # make movable and show animation
