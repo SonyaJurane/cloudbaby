@@ -65,6 +65,19 @@ def update(cycle, check, event_number, x):
     if check == 0:
         frame = idle[cycle]
         cycle, event_number = gif_work(cycle, idle, event_number, 1, 28)
+
+        global action, y
+        rand = random.randrange(0, 100)
+
+        if rand < 3:
+            action = [0, 0]
+        elif rand < 6:
+            action = [random.randrange(-5, 5), random.randrange(-5, 5)]
+        x += action[0]
+        y += action[1]
+        if x > max_x:
+            x -= action[0]
+            action[0] = -action[0]
     # idle to sleep
     elif check == 1:
         frame = idle_to_talk[cycle]
@@ -84,21 +97,21 @@ def update(cycle, check, event_number, x):
         cycle, event_number = gif_work(cycle, walk_negative, event_number, 1, 9)
         x -= -3
 
-    global action, y
-    rand = random.randrange(0, 100)
-
-    if rand < 3:
-        action = [0, 0]
-    elif rand < 6:
-        action = [random.randrange(-5, 5), random.randrange(-5, 5)]
-    x += action[0]
-    y += action[1]
-    if x > max_x:
-        x -= action[0]
-        action[0] = -action[0]
-    if y > max_y:
-        y -= action[1]
-        action[1] = -action[1]
+    # global action, y
+    # rand = random.randrange(0, 100)
+    #
+    # if rand < 3:
+    #     action = [0, 0]
+    # elif rand < 6:
+    #     action = [random.randrange(-5, 5), random.randrange(-5, 5)]
+    # x += action[0]
+    # y += action[1]
+    # if x > max_x:
+    #     x -= action[0]
+    #     action[0] = -action[0]
+    # if y > max_y:
+    #     y -= action[1]
+    #     action[1] = -action[1]
     window.geometry('200x80+' + str(x) + '+' + str(max_y-150))
     label.configure(image=frame)
     window.after(1, event, cycle, check, event_number, x)
