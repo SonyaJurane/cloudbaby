@@ -43,6 +43,8 @@ def event(cycle, check, event_number, x):
         check = 1
         print('from idle to talk')
         window.after(100, update, cycle, check, event_number, x)  # no. 5 = idle to sleep
+        #from textwimage import makeittalk
+        #makeittalk('Hello!')
     # elif event_number in walk_left:
     #     check = 4
     #     print('walking towards left')
