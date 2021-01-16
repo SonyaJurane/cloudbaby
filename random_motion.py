@@ -35,6 +35,7 @@ def update(ind):
     window.after(200, update, ind)
 
 
+# update the pet's position
 def update_position():
     global action, x, y
     rand = random.randrange(0, 100)
