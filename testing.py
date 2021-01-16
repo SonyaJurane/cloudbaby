@@ -20,6 +20,7 @@ walk_left = [6, 7]
 walk_right = [8, 9]
 event_number = random.randrange(1, 3, 1)
 currenttime = datetime.now().strftime("%H:%M:%S")
+# starttime = 
 
 
 # transfer random no. to event
