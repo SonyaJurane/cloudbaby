@@ -5,9 +5,9 @@ from datetime import datetime
 import ctypes
 import PIL
 
-cycle = 0
+cycle = 1
 
-check = 1
+check = 0
 idle_num = [1, 2, 3, 4]
 talk = [5, 6]
 event_number = random.randrange(1, 3, 1)
@@ -28,11 +28,11 @@ y = max_y-200
 # transfer random no. to event
 def event(cycle, check, event_number, x):
     # print(event_number)
-    if event_number in idle_num:
+    if event_number < 5:
         check = 0
         # print('idle')
         window.after(100, update, cycle, check, event_number, x)
-    elif event_number in talk:
+    else:
         check = 1
         # print('from idle to talk')
         window.after(1000, update, cycle, check, event_number, x)
@@ -41,14 +41,20 @@ def event(cycle, check, event_number, x):
 
 
 # making gif work
-# variable ‘cycle’ will increase by 1, but when > (length of the frame array - 1), decrements to 0
-# and changes the event_number in randrange to have pet change actions every time a gif has looped once
-def gif_work(cycle, frames, event_number, first_num, last_num):
-    if cycle < len(frames) - 1:
-        cycle += 1
+def gif_work(cycle, frames, event_number):
+    # if it is in idle mode we want it to keep looping through those frames
+    if check == 0:
+        if cycle < len(frames) - 1:
+            cycle += 1
+        else:
+            cycle = 0
+            event_number = random.randrange(0, 100)
+    # if it is talking we want it to keep talking
     else:
-        cycle = 0
-        event_number = random.randrange(1,7)
+        if cycle == 5:
+            cycle = 6
+        else:
+            cycle = 5
     return cycle, event_number
 
 
@@ -58,7 +64,7 @@ def update(cycle, check, event_number, x):
     # idle
     if check == 0:
         frame = idle[cycle]
-        cycle, event_number = gif_work(cycle, idle, event_number, 1, 28)
+        cycle, event_number = gif_work(cycle, idle, event_number)
 
         global action, y
         rand = random.randrange(0, 100)
@@ -72,10 +78,10 @@ def update(cycle, check, event_number, x):
         if x > max_x:
             x -= action[0]
             action[0] = -action[0]
-    # idle to sleep
+    # talking
     elif check == 1:
         frame = idle_to_talk[cycle]
-        cycle, event_number = gif_work(cycle, idle_to_talk, event_number, 10, 10)  # sleep
+        cycle, event_number = gif_work(cycle, idle_to_talk, event_number)
 
     window.geometry('200x80+' + str(x) + '+' + str(max_y-150))
     label.configure(image=frame)
@@ -90,7 +96,7 @@ window = tk.Tk()
 # PhotoImage() can only be called after creation of Tk()
 idle = [tk.PhotoImage(file='cloud_idle.gif', format='gif -index %i' % (i)) for i in range(28)]  # idle gif
 idle_to_talk = [tk.PhotoImage(file='cloud_talk.gif', format='gif -index %i' % (i)) for i in
-                range(28)]  # idle to sleep gif
+                range(28)]  # talk gif
 
 # window configuration
 window.config(highlightbackground='black')

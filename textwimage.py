@@ -4,8 +4,7 @@ from PIL import Image, ImageTk
 import time
 import os
 
-def makeittalk(xpos, ypos, text):
-    window = Tk()
+def makeittalk(window, xpos, ypos, text):
     window.geometry("+" + str(xpos) + "+" + str(ypos)) #change the cloud's position
 
     #open images:
