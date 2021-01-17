@@ -18,7 +18,6 @@ max_y = user32.GetSystemMetrics(1)
 # start x and y positions
 x = max_x-400
 y = max_y-200
-print(max_x)
 
 def obtain_prompt():
     prompts = []
