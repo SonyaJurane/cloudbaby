@@ -67,7 +67,7 @@ def update(ind):
         if x + action > max_x - max_x//3:
             x += action
 
-    root.geometry('200x147+' + str(x) + '+' + str(y))
+    root.geometry('200x130+' + str(x) + '+' + str(y))
     label.configure(image=frame)
     root.after(100, update, ind)
 
@@ -76,7 +76,7 @@ label = tk.Label(root, bg='black')
 label.pack()
 root.after(0, update, 0)
 
-image = Image.open('speech_bubble.png')
+image = Image.open('speech_bubble2.png')
 speechbubble_image = ImageTk.PhotoImage(image)
 speechbubble = tk.Label(root, text=choose_prompt, image=speechbubble_image, compound='center', bg='black')
 speechbubble.config(font=("Courier 8 bold"))
