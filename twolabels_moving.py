@@ -56,10 +56,13 @@ def update(ind):
         action = 0
     elif rand < 6:
         action = random.randrange(-5, 5)
-    x += action
-    if x > max_x:
-        x -= action
-        action = -action
+
+    if action >= 0:
+        if x + action < max_x - 200:
+            x += action
+    else:
+        if x + action > max_x - max_x//3:
+            x += action
 
     root.geometry('200x147+' + str(x) + '+' + str(y))
     label.configure(image=frame)
