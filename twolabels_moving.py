@@ -28,7 +28,6 @@ def obtain_prompt():
         print("Error")
     else:
         prompts = newfile.read().splitlines()
-
     return random.choice(prompts)
 
 choose_prompt = obtain_prompt()
