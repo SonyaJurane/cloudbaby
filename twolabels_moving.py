@@ -18,6 +18,16 @@ max_y = user32.GetSystemMetrics(1)
 x = max_x-400
 y = max_y-200
 
+
+def moveWindow(event):
+    global y
+    root.geometry('+{0}+{1}'.format(event.x_root, event.y_root))
+    y = event.y_root
+
+
+root.bind("<B1-Motion>", moveWindow)
+
+
 def obtain_prompt():
     prompts = []
     try:
