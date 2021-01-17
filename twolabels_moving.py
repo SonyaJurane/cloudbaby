@@ -1,4 +1,3 @@
-import pyautogui
 from tkinter import *
 import tkinter as tk
 import random
@@ -18,28 +17,9 @@ max_y = user32.GetSystemMetrics(1)
 x = max_x-400
 y = max_y-200
 
-
-def moveWindow(event):
-    global y
-    root.geometry('+{0}+{1}'.format(event.x_root, event.y_root))
-    y = event.y_root
-
-
-root.bind("<B1-Motion>", moveWindow)
-
-
-def obtain_prompt():
-    prompts = []
-    try:
-        new_file = open('Prompts', 'r')
-    except:
-        print("Error, file not found")
-    else:
-        prompts = new_file.read().splitlines()
-
-    return random.choice(prompts)
-
-choose_prompt = obtain_prompt()
+prompts = ["Take a break!", "Get some water!", "Grab a snack!", "Take a breather!", "Stretch out!", "Walk around", 
+"It’s ok to rest!", "Stay hydrated!", "Have you eaten?", "Have you slept?"]
+choose_prompt = random.choice(prompts)
 
 frames = [PhotoImage(file='cloud_idle.gif',format = 'gif -index %i' %(i)) for i in range(28)]
 
@@ -49,26 +29,21 @@ def update(ind):
     ind += 1
     if ind == 28:
         ind = 0
+        choose_prompt = random.choice(prompts)
     global action, x, y
     rand = random.randrange(0, 100)
     if rand < 3:
         action = 0
     elif rand < 6:
-        action = random.randrange(-5,5)
-
-    if action >= 0:
-        if x + action < max_x - 200:
-            x += action
-    else:
-        if x + action > max_x - max_x//3:
-            x += action
-
-    print(action)
+        action = random.randrange(-5, 5)
+    x += action
+    if x > max_x:
+        x -= action
+        action = -action
 
     root.geometry('200x147+' + str(x) + '+' + str(y))
     label.configure(image=frame)
     root.after(100, update, ind)
-    choose_prompt = obtain_prompt()
 
 
 label = tk.Label(root, bg='black')
@@ -78,7 +53,8 @@ root.after(0, update, 0)
 image = Image.open('speech_bubble.png')
 speechbubble_image = ImageTk.PhotoImage(image)
 speechbubble = tk.Label(root, text=choose_prompt, image=speechbubble_image, compound='center', bg='black')
-speechbubble.config(font=("Courier 8 bold"))
+speechbubble.config(font=("Courier 10 bold"))
+speechbubble.config(fg="#9280CF")
 
 root.overrideredirect(True) #remove the window border
 
