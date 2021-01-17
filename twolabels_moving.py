@@ -29,6 +29,7 @@ def update(ind):
     ind += 1
     if ind == 28:
         ind = 0
+        choose_prompt = random.choice(prompts)
     global action, x, y
     rand = random.randrange(0, 100)
     if rand < 3:
@@ -43,7 +44,6 @@ def update(ind):
     root.geometry('200x147+' + str(x) + '+' + str(y))
     label.configure(image=frame)
     root.after(100, update, ind)
-    choose_prompt = random.choice(prompts)
 
 
 label = tk.Label(root, bg='black')
@@ -54,6 +54,8 @@ image = Image.open('speech_bubble.png')
 speechbubble_image = ImageTk.PhotoImage(image)
 speechbubble = tk.Label(root, text=choose_prompt, image=speechbubble_image, compound='center', bg='black')
 speechbubble.config(font=("Courier 10 bold"))
+speechbubble.config(fg="#9280CF")
+
 
 root.overrideredirect(True) #remove the window border
 
