@@ -97,6 +97,11 @@ root.wm_attributes('-transparentcolor', 'black') #make black colour transparent
 root.wm_attributes("-topmost", -1)
 
 
-speechbubble.pack()
+def SEND():
+    speechbubble.config(text=obtain_prompt())
+    root.after(10000, SEND)
 
+
+speechbubble.pack()
+SEND()
 root.mainloop()
