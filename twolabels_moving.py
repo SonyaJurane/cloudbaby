@@ -17,7 +17,7 @@ max_y = user32.GetSystemMetrics(1)
 # start x and y positions
 x = max_x-400
 y = max_y-200
-
+print(max_x)
 
 def obtain_prompt():
     prompts = []
@@ -36,9 +36,12 @@ frames = [PhotoImage(file='cloud_idle.gif',format = 'gif -index %i' %(i)) for i 
 
 
 def moveWindow(event):
-    global y
+    global x, y
     root.geometry('+{0}+{1}'.format(event.x_root, event.y_root))
-    y = event.y_root
+    if event.y_root > 0 and event.y_root < (max_y - 147):
+        y = event.y_root
+    if event.x_root > 0 and event.x_root < (max_x - 200):
+        x = event.x_root
 
 
 root.bind("<B1-Motion>", moveWindow)
