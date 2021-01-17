@@ -1,3 +1,4 @@
+import pyautogui
 from tkinter import *
 import tkinter as tk
 import random
@@ -22,6 +23,14 @@ prompts = ["Take a break!", "Get some water!", "Grab a snack!", "Take a breather
 choose_prompt = random.choice(prompts)
 
 frames = [PhotoImage(file='cloud_idle.gif',format = 'gif -index %i' %(i)) for i in range(28)]
+
+def obtain_prompt():
+    prompts = []
+    try:
+        new_file = open('Prompts.txt', 'r')
+    except:
+        print("Error, file not found")
+
 
 
 def update(ind):
@@ -58,7 +67,7 @@ root.after(0, update, 0)
 image = Image.open('speech_bubble.png')
 speechbubble_image = ImageTk.PhotoImage(image)
 speechbubble = tk.Label(root, text=choose_prompt, image=speechbubble_image, compound='center', bg='black')
-speechbubble.config(font=("Courier 10 bold"))
+speechbubble.config(font=("Courier 8 bold"))
 
 root.overrideredirect(True) #remove the window border
 
