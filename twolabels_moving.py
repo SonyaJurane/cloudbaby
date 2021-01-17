@@ -24,6 +24,15 @@ choose_prompt = random.choice(prompts)
 frames = [PhotoImage(file='cloud_idle.gif',format = 'gif -index %i' %(i)) for i in range(28)]
 
 
+def moveWindow(event):
+    global y
+    root.geometry('+{0}+{1}'.format(event.x_root, event.y_root))
+    y = event.y_root
+
+
+root.bind("<B1-Motion>", moveWindow)
+
+
 def update(ind):
     frame = frames[ind]
     ind += 1
