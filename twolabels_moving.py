@@ -114,6 +114,7 @@ root.wm_attributes("-topmost", -1)
 
 def SEND():
     pygame.mixer.music.load("pop.mp3")
+    pygame.mixer.music.set_volume(0.5)
     pygame.mixer.music.play(loops=0)
     speechbubble.config(text=obtain_prompt())
     root.after(10000, SEND)
