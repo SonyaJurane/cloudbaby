@@ -53,8 +53,9 @@ root.bind("<B1-Motion>", moveWindow)
 
 
 def click(event):
-    root.after(0, SEND)
-
+    pygame.mixer.music.load("pop.mp3")
+    pygame.mixer.music.set_volume(0.5)
+    pygame.mixer.music.play(loops=0)
 
 root.bind("<Button-1>", click)
 
