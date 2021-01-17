@@ -56,7 +56,6 @@ speechbubble = tk.Label(root, text=choose_prompt, image=speechbubble_image, comp
 speechbubble.config(font=("Courier 10 bold"))
 speechbubble.config(fg="#9280CF")
 
-
 root.overrideredirect(True) #remove the window border
 
 root.wm_attributes('-transparentcolor', 'black') #make black colour transparent
