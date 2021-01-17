@@ -49,12 +49,15 @@ def moveWindow(event):
 root.bind("<B1-Motion>", moveWindow)
 
 
-def update(ind):
-    i = random.randint(1,10)
-    if i < 9:
-        frame = frames[ind]
-    else:
-        frame = frame2[ind]
+def update(ind, state):
+    if ind == 0:
+        i = random.randint(1, 20)
+        if i < 10:
+            state = frames
+        else:
+            state = frame2
+        print(i)
+    frame = state[ind]
     ind += 1
     if ind == 28:
         ind = 0
@@ -75,11 +78,12 @@ def update(ind):
 
     root.geometry('200x130+' + str(x) + '+' + str(y))
     label.configure(image=frame)
-    root.after(100, update, ind)
+    root.after(100, update, ind, state)
 
 label = tk.Label(root, bg='black')
 label.pack()
-root.after(0, update, 0)
+state = frames[0]
+root.after(0, update, 0, state)
 
 image = Image.open('speech_bubble2.png')
 speechbubble_image = ImageTk.PhotoImage(image)
