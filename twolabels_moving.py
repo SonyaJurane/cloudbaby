@@ -18,19 +18,20 @@ max_y = user32.GetSystemMetrics(1)
 x = max_x-400
 y = max_y-200
 
-prompts = ["Take a break!", "Get some water!", "Grab a snack!", "Take a breather!", "Stretch out!", "Walk around", 
-"It’s ok to rest!", "Stay hydrated!", "Have you eaten?", "Have you slept?"]
-choose_prompt = random.choice(prompts)
-
-frames = [PhotoImage(file='cloud_idle.gif',format = 'gif -index %i' %(i)) for i in range(28)]
-
 def obtain_prompt():
     prompts = []
     try:
-        new_file = open('Prompts.txt', 'r')
+        new_file = open('Prompts', 'r')
     except:
         print("Error, file not found")
+    else:
+        prompts = new_file.read().splitlines()
 
+    return random.choice(prompts)
+
+choose_prompt = obtain_prompt()
+
+frames = [PhotoImage(file='cloud_idle.gif',format = 'gif -index %i' %(i)) for i in range(28)]
 
 
 def update(ind):
@@ -57,7 +58,7 @@ def update(ind):
     root.geometry('200x147+' + str(x) + '+' + str(y))
     label.configure(image=frame)
     root.after(100, update, ind)
-    choose_prompt = random.choice(prompts)
+    choose_prompt = obtain_prompt()
 
 
 label = tk.Label(root, bg='black')
