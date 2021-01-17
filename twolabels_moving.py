@@ -49,6 +49,13 @@ def moveWindow(event):
 root.bind("<B1-Motion>", moveWindow)
 
 
+def click(event):
+    root.after(0, SEND)
+
+
+root.bind("<Button-1>", click)
+
+
 def update(ind, state):
     if ind == 0:
         i = random.randint(1, 20)
@@ -79,6 +86,7 @@ def update(ind, state):
     root.geometry('200x130+' + str(x) + '+' + str(y))
     label.configure(image=frame)
     root.after(100, update, ind, state)
+
 
 label = tk.Label(root, bg='black')
 label.pack()
