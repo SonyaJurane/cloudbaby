@@ -4,7 +4,10 @@ import tkinter as tk  # used as GUI
 from datetime import datetime
 import ctypes
 import PIL
+from textwimage import makeittalk
 
+makeittalk(300, 400, 'Hello!')
+        
 cycle = 1
 
 check = 0
@@ -35,9 +38,10 @@ def event(cycle, check, event_number, x):
     else:
         check = 1
         # print('from idle to talk')
-        window.after(1000, update, cycle, check, event_number, x)
-        #from textwimage import makeittalk
-        #makeittalk('Hello!')
+        
+
+        #window.after(1000, update, cycle, check, event_number, x)
+        
 
 
 # making gif work
