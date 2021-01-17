@@ -2,6 +2,7 @@ import pyautogui
 from tkinter import *
 import tkinter as tk
 import random
+import pygame
 import time
 import os
 from PIL import Image, ImageTk
@@ -18,6 +19,8 @@ max_y = user32.GetSystemMetrics(1)
 # start x and y positions
 x = max_x-400
 y = max_y-200
+
+pygame.mixer.init()
 
 def obtain_prompt():
     prompts = []
@@ -111,6 +114,8 @@ root.wm_attributes("-topmost", -1)
 
 
 def SEND():
+    pygame.mixer.music.load("pop.mp3")
+    pygame.mixer.music.play(loops=0)
     speechbubble.config(text=obtain_prompt())
     root.after(10000, SEND)
 
