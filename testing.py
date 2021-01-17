@@ -3,11 +3,9 @@ import random  # pet will move in random direction
 import tkinter as tk  # used as GUI
 from datetime import datetime
 import ctypes
+from PIL import Image, ImageTk
 import PIL
-from textwimage import makeittalk
 
-makeittalk(300, 400, 'Hello!')
-        
 cycle = 1
 
 check = 0
@@ -38,10 +36,9 @@ def event(cycle, check, event_number, x):
     else:
         check = 1
         # print('from idle to talk')
-        
-
-        #window.after(1000, update, cycle, check, event_number, x)
-        
+        window.after(100, update, cycle, check, event_number, x)
+        #from textwimage import makeittalk
+        #makeittalk('Hello!')
 
 
 # making gif work
@@ -101,7 +98,6 @@ window = tk.Tk()
 idle = [tk.PhotoImage(file='cloud_idle.gif', format='gif -index %i' % (i)) for i in range(28)]  # idle gif
 idle_to_talk = [tk.PhotoImage(file='cloud_talk.gif', format='gif -index %i' % (i)) for i in
                 range(28)]  # talk gif
-
 # window configuration
 window.config(highlightbackground='black')
 # make movable and show animation
@@ -116,6 +112,7 @@ label.pack()
 
 # after 1000 ms (1s), program will call update() to change animation
 window.after(1, update, cycle, check, event_number, x)
+
 
 # run the Tkinter event loop
 window.mainloop()

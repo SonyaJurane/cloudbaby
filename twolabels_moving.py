@@ -53,6 +53,7 @@ speechbubble.config(font=("Courier 10 bold"))
 root.overrideredirect(True) #remove the window border
 
 root.wm_attributes('-transparentcolor', 'black') #make black colour transparent
+root.wm_attributes("-topmost", -1)
 
 
 speechbubble.pack()
