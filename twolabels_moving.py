@@ -6,6 +6,7 @@ import time
 import os
 from PIL import Image, ImageTk
 import ctypes
+global change
 root = Tk()
 
 action = random.randrange(-5, 5)
@@ -33,6 +34,7 @@ def obtain_prompt():
 choose_prompt = obtain_prompt()
 
 frames = [PhotoImage(file='cloud_idle.gif',format = 'gif -index %i' %(i)) for i in range(28)]
+frame2 = [PhotoImage(file='cloud_talk.gif',format = 'gif -index %i' %(i)) for i in range(28)]
 
 
 def moveWindow(event):
@@ -48,7 +50,11 @@ root.bind("<B1-Motion>", moveWindow)
 
 
 def update(ind):
-    frame = frames[ind]
+    i = random.randint(1,10)
+    if i < 9:
+        frame = frames[ind]
+    else:
+        frame = frame2[ind]
     ind += 1
     if ind == 28:
         ind = 0
@@ -70,7 +76,6 @@ def update(ind):
     root.geometry('200x130+' + str(x) + '+' + str(y))
     label.configure(image=frame)
     root.after(100, update, ind)
-
 
 label = tk.Label(root, bg='black')
 label.pack()
