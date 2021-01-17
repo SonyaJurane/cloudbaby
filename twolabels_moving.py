@@ -1,3 +1,13 @@
+"""
+Cloud Baby
+By: Emily Zhou, Patty Liu, Saba Memon, and Sonya Jurane
+
+Bibliography
+
+TheNobody. "Simple Facial Recognition Lock in Python." Medium, 19 Mar. 20202019, 
+    medium.com/analytics-vidhya/simple-facial-recognition-lock-in-python-fc3bdb65f9e2.
+"""
+
 import pyautogui
 from tkinter import *
 import tkinter as tk
