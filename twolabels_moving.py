@@ -35,7 +35,9 @@ choose_prompt = obtain_prompt()
 
 frames = [PhotoImage(file='cloud_idle.gif',format = 'gif -index %i' %(i)) for i in range(28)]
 frame2 = [PhotoImage(file='cloud_talk.gif',format = 'gif -index %i' %(i)) for i in range(28)]
-
+frame3 = [PhotoImage(file='cloud_uwu.gif',format = 'gif -index %i' %(i)) for i in range(28)]
+frame4 = [PhotoImage(file='cloud_o.gif',format = 'gif -index %i' %(i)) for i in range(28)]
+frame5 = [PhotoImage(file='cloud_w.gif',format = 'gif -index %i' %(i)) for i in range(28)]
 
 def moveWindow(event):
     global x, y
@@ -58,12 +60,17 @@ root.bind("<Button-1>", click)
 
 def update(ind, state):
     if ind == 0:
-        i = random.randint(1, 20)
-        if i < 10:
+        i = random.randint(1, 100)
+        if i < 60:
             state = frames
-        else:
+        elif 61 <= i < 70:
             state = frame2
-        print(i)
+        elif 71 <= i < 80:
+            state = frame3
+        elif 81 <= i < 90:
+            state = frame4
+        else:
+            state = frame5
     frame = state[ind]
     ind += 1
     if ind == 28:
