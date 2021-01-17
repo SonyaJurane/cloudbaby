@@ -75,7 +75,6 @@ def update(ind, state):
     ind += 1
     if ind == 28:
         ind = 0
-        choose_prompt = obtain_prompt()
     global action, x, y
     rand = random.randrange(0, 100)
     if rand < 3:
