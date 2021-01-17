@@ -101,7 +101,7 @@ def update(ind, state):
         if x + action > max_x - max_x//3:
             x += action
 
-    root.geometry('201x130+' + str(x) + '+' + str(y))
+    root.geometry('204x130+' + str(x) + '+' + str(y))
     label.configure(image=frame)
     root.after(100, update, ind, state)
 
